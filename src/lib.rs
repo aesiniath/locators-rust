@@ -25,28 +25,10 @@ pub fn pad_with_zeros(width: usize, s: &str) -> String {
     unimplemented!()
 }
 
-const BASE62: [char; 62] = [
-    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
-    'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b',
-    'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
-    'v', 'w', 'x', 'y', 'z',
-];
-
 // convert a number to base62
 pub fn to_base62(n: u64) -> String {
-    let mut n = n;
-    let mut result = String::new();
-
-    while n > 0 {
-        let r = (n % 62) as usize;
-        result.push(BASE62[r]);
-        n /= 62;
-    }
-
-    result
-        .chars()
-        .rev()
-        .collect()
+    // use the encoder from the base62 crate
+    base62::encode(n)
 }
 
 pub fn from_base62(s: &str) -> Option<u64> {
