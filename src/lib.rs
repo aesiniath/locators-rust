@@ -23,9 +23,28 @@ pub fn pad_with_zeros(width: usize, s: &str) -> String {
     unimplemented!()
 }
 
+// convert a number to base62
 pub fn to_base62(n: u64) -> String {
-    // Implement your toBase62 function here
-    unimplemented!()
+    const BASE62: [char; 62] = [
+        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
+        'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
+        's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+    ];
+
+    let mut n = n;
+    let mut result = String::new();
+
+    while n > 0 {
+        let r = (n % 62) as usize;
+        result.push(BASE62[r]);
+        n /= 62;
+    }
+
+    result
+        .chars()
+        .rev()
+        .collect()
 }
 
 pub fn hash_string_to_base62(width: usize, s: &str) -> String {
@@ -53,6 +72,15 @@ mod tests {
     use super::*;
     use quickcheck::quickcheck;
     use std::panic;
+
+    #[test]
+    fn check_int_to_base62() {
+        assert_eq!(to_base62(1), "1");
+        assert_eq!(to_base62(61), "z");
+        assert_eq!(to_base62(62), "10");
+        assert_eq!(to_base62(63), "11");
+        assert_eq!(to_base62(u64::MAX), "LygHa16AHYF");
+    }
 
     #[test]
     fn test_round_trip_english16() {
