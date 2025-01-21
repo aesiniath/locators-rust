@@ -1,3 +1,5 @@
+use base62;
+
 pub fn to_english16(n: u32) -> String {
     // Implement your toEnglish16 function here
     unimplemented!()
@@ -48,24 +50,14 @@ pub fn to_base62(n: u64) -> String {
 }
 
 pub fn from_base62(s: &str) -> Option<u64> {
-    // take a String of base62 characters and convert it to a number
-    let mut result: u64 = 0;
+    // use the decoder from the base62 crate
+    let result = base62::decode(s);
 
-    for (i, c) in s
-        .chars()
-        .rev()
-        .enumerate()
-    {
-        match BASE62
-            .iter()
-            .position(|&x| x == c)
-        {
-            Some(p) => result += (p as u64) * 62_u64.pow(i as u32),
-            None => return None,
-        }
+    // truncate the result to u64
+    match result {
+        Ok(x) => Some(x as u64),
+        Err(_) => None,
     }
-
-    Some(result)
 }
 
 pub fn hash_string_to_base62(width: usize, s: &str) -> String {

@@ -8,6 +8,7 @@ license = "MIT"
 repository = "https://github.com/aesiniath/locators-rust"
 
 [dependencies]
+base62 = "2.2"
 
 [dev-dependencies]
 quickcheck = "1.0"
