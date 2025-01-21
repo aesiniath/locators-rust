@@ -1,9 +1,0 @@
-tags
-/.stack-work/
-
-# test binaries
-check
-snippet
-
-# various editor detritus
-.buildconfig
