@@ -23,15 +23,15 @@ pub fn pad_with_zeros(width: usize, s: &str) -> String {
     unimplemented!()
 }
 
+const BASE62: [char; 62] = [
+    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
+    'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b',
+    'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
+    'v', 'w', 'x', 'y', 'z',
+];
+
 // convert a number to base62
 pub fn to_base62(n: u64) -> String {
-    const BASE62: [char; 62] = [
-        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
-        'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
-        's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-    ];
-
     let mut n = n;
     let mut result = String::new();
 
@@ -45,6 +45,27 @@ pub fn to_base62(n: u64) -> String {
         .chars()
         .rev()
         .collect()
+}
+
+pub fn from_base62(s: &str) -> Option<u64> {
+    // take a String of base62 characters and convert it to a number
+    let mut result: u64 = 0;
+
+    for (i, c) in s
+        .chars()
+        .rev()
+        .enumerate()
+    {
+        match BASE62
+            .iter()
+            .position(|&x| x == c)
+        {
+            Some(p) => result += (p as u64) * 62_u64.pow(i as u32),
+            None => return None,
+        }
+    }
+
+    Some(result)
 }
 
 pub fn hash_string_to_base62(width: usize, s: &str) -> String {
@@ -80,6 +101,19 @@ mod tests {
         assert_eq!(to_base62(62), "10");
         assert_eq!(to_base62(63), "11");
         assert_eq!(to_base62(u64::MAX), "LygHa16AHYF");
+    }
+
+    #[test]
+    fn check_base62_to_int() {
+        assert_eq!(from_base62("1"), Some(1));
+        assert_eq!(from_base62("z"), Some(61));
+        assert_eq!(from_base62("10"), Some(62));
+        assert_eq!(from_base62("11"), Some(63));
+        assert_eq!(from_base62("LygHa16AHYF"), Some(u64::MAX));
+
+        assert_eq!(from_base62("!"), None);
+        assert_eq!(from_base62(" "), None);
+        assert_eq!(from_base62("1 2"), None);
     }
 
     #[test]
