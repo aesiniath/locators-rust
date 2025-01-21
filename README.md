@@ -20,6 +20,3 @@ Also included is code to work in base 62, which is simply [`'0'`-`'9'`,
 `'A'`-`'Z'`, and `'a'`-`'z'`]. These are frequently used to express short codes
 in URL redirectors; you may find them a more useful encoding for expressing
 numbers than base 16 hexidecimal.
-
-
-[Locator16]: <https://hackage.haskell.org/package/locators/docs/Data-Locator.html>
