@@ -1,13 +1,74 @@
 use base62;
 
 pub fn to_english16(n: u32) -> String {
-    // Implement your toEnglish16 function here
-    unimplemented!()
+    // a function which converts a number to base 16 but then uses the "english 16" character set to represent it.
+    let mut result = String::new();
+    let mut num = n;
+
+    while num > 0 {
+        let digit = num % 16;
+        let char = match digit {
+            0 => '0',
+            1 => '1',
+            2 => '2',
+            3 => 'C',
+            4 => '4',
+            5 => 'F',
+            6 => 'H',
+            7 => '7',
+            8 => '8',
+            9 => '9',
+            10 => 'K',
+            11 => 'L',
+            12 => 'M',
+            13 => 'R',
+            14 => 'X',
+            15 => 'Y',
+            _ => unreachable!(),
+        };
+        result.push(char);
+        num /= 16;
+    }
+
+    result
+        .chars()
+        .rev()
+        .collect()
 }
 
-pub fn from_english16(s: &str) -> u32 {
-    // Implement your fromEnglish16 function here
-    unimplemented!()
+pub fn from_english16(s: &str) -> Option<u32> {
+    // convert from the english 16 alphabet to base 10 decimal
+    let mut result = 0;
+    let mut base = 1;
+
+    if s.len() > 10 {
+        return None;
+    }
+
+    for c in s.chars() {
+        let value = match c {
+            '0' => 0,
+            '1' => 1,
+            '2' => 2,
+            'C' => 3,
+            '4' => 4,
+            'F' => 5,
+            'H' => 6,
+            '7' => 7,
+            '8' => 8,
+            '9' => 9,
+            'K' => 10,
+            'L' => 11,
+            'M' => 12,
+            'R' => 13,
+            'X' => 14,
+            'Y' => 15,
+            _ => return None,
+        };
+        result = result * 16 + value
+    }
+
+    Some(result)
 }
 
 pub fn to_english16a(width: usize, n: i32) -> String {
@@ -91,17 +152,29 @@ mod tests {
     }
 
     #[test]
-    fn test_round_trip_english16() {
-        fn prop_english16(i: i32) -> bool {
-            let n = i.abs() as u32;
-            let decoded = from_english16(&to_english16(n));
-            n == decoded
-        }
-        quickcheck(prop_english16 as fn(i32) -> bool);
+    fn check_known_english16() {
+        assert_eq!(to_english16(0x000001), "1");
+        assert_eq!(to_english16(0x000010), "10");
+        assert_eq!(to_english16(0x000100), "100");
+
+        assert_eq!(from_english16("1"), Some(1));
+        assert_eq!(from_english16("10"), Some(16));
+        assert_eq!(from_english16("100"), Some(256));
     }
 
     #[test]
-    fn test_known_english16a() {
+    fn test_round_trip_english16() {
+        fn prop_english16(n: u32) -> bool {
+            match from_english16(&to_english16(n)) {
+                Some(decoded) => n == decoded,
+                None => false,
+            }
+        }
+        quickcheck(prop_english16 as fn(u32) -> bool);
+    }
+
+    #[test]
+    fn check_known_english16a() {
         assert_eq!(to_english16a(6, 0x111111), "12C4FH");
         assert_eq!(to_english16a(6, 0x777777), "789KLM");
         assert_eq!(to_english16a(6, 0xCCCCCC), "MRXY01");
