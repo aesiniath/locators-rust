@@ -36,14 +36,9 @@ pub fn to_english16(n: u32) -> String {
         .collect()
 }
 
+// convert from the english 16 alphabet to base 10 decimal
 pub fn from_english16(s: &str) -> Option<u32> {
-    // convert from the english 16 alphabet to base 10 decimal
-    let mut result = 0;
-    let mut base = 1;
-
-    if s.len() > 10 {
-        return None;
-    }
+    let mut result: u32 = 0;
 
     for c in s.chars() {
         let value = match c {
@@ -65,7 +60,7 @@ pub fn from_english16(s: &str) -> Option<u32> {
             'Y' => 15,
             _ => return None,
         };
-        result = result * 16 + value
+        result = result.checked_mul(16)? + value;
     }
 
     Some(result)
