@@ -1,9 +1,14 @@
 use base62;
 
+// a function which converts a number to base 16 but then uses the English16
+// character set to represent it.
 pub fn to_english16(n: u32) -> String {
-    // a function which converts a number to base 16 but then uses the "english 16" character set to represent it.
     let mut result = String::new();
     let mut num = n;
+
+    if n == 0 {
+        return "0".to_owned();
+    }
 
     while num > 0 {
         let digit = num % 16;
@@ -38,7 +43,11 @@ pub fn to_english16(n: u32) -> String {
 
 // convert from the english 16 alphabet to base 10 decimal
 pub fn from_english16(s: &str) -> Option<u32> {
-    let mut result: u32 = 0;
+    let mut result = 0;
+
+    if s.len() > "YYYYYYYY".len() {
+        return None;
+    }
 
     for c in s.chars() {
         let value = match c {
@@ -60,7 +69,7 @@ pub fn from_english16(s: &str) -> Option<u32> {
             'Y' => 15,
             _ => return None,
         };
-        result = result.checked_mul(16)? + value;
+        result = result * 16 + value;
     }
 
     Some(result)
@@ -151,10 +160,15 @@ mod tests {
         assert_eq!(to_english16(0x000001), "1");
         assert_eq!(to_english16(0x000010), "10");
         assert_eq!(to_english16(0x000100), "100");
+        assert_eq!(to_english16(u32::MIN), "0");
+        assert_eq!(to_english16(u32::MAX), "YYYYYYYY");
 
         assert_eq!(from_english16("1"), Some(1));
         assert_eq!(from_english16("10"), Some(16));
         assert_eq!(from_english16("100"), Some(256));
+        assert_eq!(from_english16("0"), Some(0));
+        assert_eq!(from_english16("YYYYYYYY"), Some(u32::MAX));
+        assert_eq!(from_english16("100000000"), None);
     }
 
     #[test]
