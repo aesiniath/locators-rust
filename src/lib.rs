@@ -342,7 +342,7 @@ mod tests {
         assert_eq!(from_latin25("Z"), Some(24));
         assert_eq!(from_latin25("10"), Some(25));
 
-        // assert_eq!(from_latin25("M000000"), Some(3662109375));
+        assert_eq!(from_latin25("M000000"), Some(3662109375));
     }
 
     #[test]
