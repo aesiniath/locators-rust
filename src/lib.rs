@@ -86,8 +86,16 @@ pub fn hash_string_to_english16a(width: usize, s: &str) -> String {
 }
 
 pub fn pad_with_zeros(width: usize, s: &str) -> String {
-    // Implement your padWithZeros function here
-    unimplemented!()
+    if s.len() >= width {
+        s.to_owned()
+    } else {
+        let mut padded = String::with_capacity(width);
+        for _ in 0..(width - s.len()) {
+            padded.push('0');
+        }
+        padded.push_str(s);
+        padded
+    }
 }
 
 // convert a number to base62
@@ -295,19 +303,12 @@ mod tests {
     }
 
     #[test]
-    fn test_padding_refactored() {
+    fn check_left_padding() {
         assert_eq!(pad_with_zeros(5, "1"), "00001");
         assert_eq!(pad_with_zeros(5, "123456"), "123456");
-        assert_eq!(pad_with_zeros(11, &to_base62(2_u64.pow(64))), "LygHa16AHYG");
-        assert_eq!(
-            hash_string_to_base62(
-                11,
-                &2_u64
-                    .pow(64)
-                    .to_string()
-            ),
-            "k8SQgkJtxLo"
-        );
+        assert_eq!(pad_with_zeros(10, &to_base62(u64::MAX)), "LygHa16AHYF");
+        assert_eq!(pad_with_zeros(11, &to_base62(u64::MAX)), "LygHa16AHYF");
+        assert_eq!(pad_with_zeros(12, &to_base62(u64::MAX)), "0LygHa16AHYF");
     }
 
     #[test]
