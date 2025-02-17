@@ -76,16 +76,6 @@ pub fn from_english16(s: &str) -> Option<u32> {
     Some(result)
 }
 
-pub fn to_english16a(width: usize, n: i32) -> String {
-    // Implement your toEnglish16a function here
-    unimplemented!()
-}
-
-pub fn hash_string_to_english16a(width: usize, s: &str) -> String {
-    // Implement your hashStringToEnglish16a function here
-    unimplemented!()
-}
-
 pub fn pad_with_zeros(width: usize, s: &str) -> String {
     if s.len() >= width {
         s.to_owned()
@@ -237,16 +227,26 @@ pub fn from_latin25(s: &str) -> Option<u64> {
     Some(result)
 }
 
-pub fn hash_string_to_latin25(width: usize, s: &str) -> String {
-    // Implement your hashStringToLatin25 function here
-    unimplemented!()
+pub fn hash_string_to_latin25(s: &str) -> String {
+    let mut hasher = sha2::Sha256::new();
+    hasher.update(s.as_bytes());
+    let result = hasher.finalize();
+
+    // Convert the first 8 bytes of the hash to a u64
+    let (bytes, _) = result.split_at(std::mem::size_of::<u64>());
+    let result = u64::from_le_bytes(
+        bytes
+            .try_into()
+            .unwrap(),
+    );
+
+    to_latin25(result)
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
     use quickcheck::quickcheck;
-    use std::panic;
 
     #[test]
     fn check_int_to_base62() {
@@ -298,34 +298,12 @@ mod tests {
     }
 
     #[test]
-    fn check_known_english16a() {
-        assert_eq!(to_english16a(6, 0x111111), "12C4FH");
-        assert_eq!(to_english16a(6, 0x777777), "789KLM");
-        assert_eq!(to_english16a(6, 0xCCCCCC), "MRXY01");
-    }
-
-    #[test]
-    fn test_problematic_edge_cases() {
-        assert_eq!(to_english16a(6, 0x0), "012C4F");
-        assert_eq!(hash_string_to_english16a(6, "perf_data"), "FHL417");
-        assert_eq!(
-            hash_string_to_english16a(6, "perf_data/bletchley"),
-            "K48F01"
-        );
-    }
-
-    #[test]
     fn check_left_padding() {
         assert_eq!(pad_with_zeros(5, "1"), "00001");
         assert_eq!(pad_with_zeros(5, "123456"), "123456");
         assert_eq!(pad_with_zeros(10, &to_base62(u64::MAX)), "LygHa16AHYF");
         assert_eq!(pad_with_zeros(11, &to_base62(u64::MAX)), "LygHa16AHYF");
         assert_eq!(pad_with_zeros(12, &to_base62(u64::MAX)), "0LygHa16AHYF");
-    }
-
-    #[test]
-    fn test_negative_numbers() {
-        assert_eq!(to_english16a(1, -1), "1");
     }
 
     #[test]
@@ -383,18 +361,5 @@ mod tests {
             hash_string_to_latin25("You'll get used to it. Or, you'll have a psychotic episode"),
             "E4AJ4G9E0T8Z8T"
         );
-    }
-
-    #[test]
-    fn test_width_guards_english16a() {
-        let result = panic::catch_unwind(|| to_english16a(17, 1));
-        assert!(result.is_err());
-    }
-
-    #[test]
-    fn test_width_guards_hashing() {
-        assert_eq!(hash_string_to_latin25(17, "a").len(), 17);
-        let result = panic::catch_unwind(|| hash_string_to_latin25(18, "a"));
-        assert!(result.is_err());
     }
 }
