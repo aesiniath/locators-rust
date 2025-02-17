@@ -1,3 +1,5 @@
+use crate::greater_than;
+
 // a function which converts a number to base 16 but then uses the English16
 // character set to represent it.
 pub fn to_english16(n: u32) -> String {
@@ -43,7 +45,7 @@ pub fn to_english16(n: u32) -> String {
 pub fn from_english16(s: &str) -> Option<u32> {
     let mut result = 0;
 
-    if s.len() > "YYYYYYYY".len() {
+    if greater_than(s, "YYYYYYYY") {
         return None;
     }
 
@@ -91,6 +93,7 @@ mod tests {
         assert_eq!(from_english16("100"), Some(256));
         assert_eq!(from_english16("0"), Some(0));
         assert_eq!(from_english16("YYYYYYYY"), Some(u32::MAX));
+        assert_eq!(from_english16("YYYYYYYZ"), None); // illegal character, also "greater"
         assert_eq!(from_english16("100000000"), None);
     }
 
