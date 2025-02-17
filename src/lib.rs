@@ -1,5 +1,5 @@
 use base62;
-use sha2::{Digest, Sha256};
+use sha2::Digest;
 
 // a function which converts a number to base 16 but then uses the English16
 // character set to represent it.
@@ -132,7 +132,7 @@ pub fn hash_string_to_base62(s: &str) -> String {
     to_base62(result)
 }
 
-pub fn to_latin25(n: u32) -> String {
+pub fn to_latin25(n: u64) -> String {
     let mut result = String::new();
     let mut num = n;
 
@@ -195,10 +195,10 @@ fn greater_than(s1: &str, s2: &str) -> bool {
     false
 }
 
-pub fn from_latin25(s: &str) -> Option<u32> {
+pub fn from_latin25(s: &str) -> Option<u64> {
     let mut result = 0;
 
-    if greater_than(s, "LygHa16AHYG") {
+    if greater_than(s, "JEJ449Z0XWHALM") {
         return None;
     }
 
@@ -346,6 +346,7 @@ mod tests {
         assert_eq!(to_latin25(24), "Z");
         assert_eq!(to_latin25(25), "10");
         assert_eq!(to_latin25(3662109375), "M000000");
+        assert_eq!(to_latin25(u64::MAX), "JEJ449Z0XWHALM");
 
         assert_eq!(from_latin25("0"), Some(0));
         assert_eq!(from_latin25("1"), Some(1));
@@ -359,13 +360,13 @@ mod tests {
 
     #[test]
     fn check_round_trip_latin25() {
-        fn prop_latin25(n: u32) -> bool {
+        fn prop_latin25(n: u64) -> bool {
             match from_latin25(&to_latin25(n)) {
                 Some(decoded) => n == decoded,
                 None => false,
             }
         }
-        quickcheck(prop_latin25 as fn(u32) -> bool);
+        quickcheck(prop_latin25 as fn(u64) -> bool);
     }
 
     #[test]
@@ -379,11 +380,8 @@ mod tests {
     #[test]
     fn test_hash_latin25() {
         assert_eq!(
-            hash_string_to_latin25(
-                5,
-                "You'll get used to it. Or, you'll have a psychotic episode"
-            ),
-            "XSAV1"
+            hash_string_to_latin25("You'll get used to it. Or, you'll have a psychotic episode"),
+            "E4AJ4G9E0T8Z8T"
         );
     }
 
