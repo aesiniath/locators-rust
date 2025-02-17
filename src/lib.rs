@@ -1,4 +1,5 @@
 use base62;
+use sha2::{Digest, Sha256};
 
 // a function which converts a number to base 16 but then uses the English16
 // character set to represent it.
@@ -115,9 +116,20 @@ pub fn from_base62(s: &str) -> Option<u64> {
     }
 }
 
-pub fn hash_string_to_base62(width: usize, s: &str) -> String {
-    // Implement your hashStringToBase62 function here
-    unimplemented!()
+pub fn hash_string_to_base62(s: &str) -> String {
+    let mut hasher = sha2::Sha256::new();
+    hasher.update(s.as_bytes());
+    let result = hasher.finalize();
+
+    // Convert the first 8 bytes of the hash to a u64
+    let (bytes, _) = result.split_at(std::mem::size_of::<u64>());
+    let result = u64::from_le_bytes(
+        bytes
+            .try_into()
+            .unwrap(),
+    );
+
+    to_base62(result)
 }
 
 pub fn to_latin25(n: u32) -> String {
@@ -354,6 +366,14 @@ mod tests {
             }
         }
         quickcheck(prop_latin25 as fn(u32) -> bool);
+    }
+
+    #[test]
+    fn test_hash_base62() {
+        assert_eq!(
+            hash_string_to_base62("You'll get used to it. Or, you'll have a psychotic episode"),
+            "GDDR4HcGLCV"
+        );
     }
 
     #[test]

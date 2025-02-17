@@ -9,6 +9,7 @@ repository = "https://github.com/aesiniath/locators-rust"
 
 [dependencies]
 base62 = "2.2"
+sha2 = "0.10"
 
 [dev-dependencies]
 quickcheck = "1.0"
