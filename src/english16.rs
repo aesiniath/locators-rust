@@ -12,15 +12,47 @@
 //! same place they correspond to in base 10; the letters were then allocated
 //! in alpha order in the remaining slots.
 
+// 0 Conflicts with 'O' obviously, and 'Q' often enough
+//
+// 2 'U', 'W', and '2'. 'W' is disqualifed because of
+// the way Australians butcher double-this and triple-that. \"Double
+// 'U'\" or \"'W'\"?
+//
+// C 'B', 'C', 'D', 'E', 'G', 'P', 'T',
+// 'V', and '3' plus 'Z' because Americans can't pronounce
+// Zed properly.
+//
+// 4 '4' and '5' are often confused, and '5', definitely
+// out due to its collision with 'I' when spoken and 'S' in
+// writing.
+//
+// F 'F' and 'S' are notoriously confused, making the choice of
+// 'F' borderline, but 'S' is already disqualified for looking
+// like '5'.
+//
+// K group of 'A', 'J', 'K'.
+//
+// L 'L' has good phonetics, and as long as it's upper case (which
+// the whole 'English16' symbol set is) there's no conflict with
+// '1'.
+//
+// M choice from 'M' and 'N'; the latter is a little too close
+// to '7'.
+//
+// X choice from 'X' and '6'.
+//
+// Y choice from 'I', 'Y', '5'. 'I' is out for the
+// usual reason of being similar to '1'.
+
 use crate::greater_than;
 
 /// Given a number, convert it to a string in the English16 base 16 symbol
 /// alphabet.
 ///
-/// You can use this as a replacement for the standard \'0\'-\'9\' \'A\'-\'F\'
-/// symbols traditionally used to express hexidemimal, though really the fact
-/// that we came up with 16 total unique symbols was a nice co-incidence, not
-/// a requirement.
+/// You can use this as a replacement for the standard `'0'`-`'9'` and
+/// `'A'`-`'F'` symbols traditionally used to express hexidemimal, though
+/// really the fact that we came up with 16 total unique symbols was a nice
+/// co-incidence, not a requirement.
 pub fn to_english16(n: u32) -> String {
     let mut result = String::new();
     let mut num = n;

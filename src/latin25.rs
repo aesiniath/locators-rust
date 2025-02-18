@@ -1,5 +1,12 @@
 //! A symbol set with twenty-five visually distinct characters.
 //!
+//! This alphabet's letters were chosen to maximize the contrast in glyph
+//! shapes and to avoid ambiguities. So, for example, only one of `'2'` and
+//! `'Z'` can be a letter of the alphabet (here we chose the latter for it
+//! being more angular). Likewise only one of `'O'`, `'Q'`, and `'0'` is
+//! available; having chosen `'0'` to represent zero the other candidates are
+//! knocked out.
+//!
 //! These are not protected against similar pronounciations; if you need to
 //! read your identifiers _aloud_ use [English16](crate::english16) instead.
 
@@ -7,8 +14,10 @@ use crate::greater_than;
 use sha2::Digest;
 
 /// Given a number, convert it to a string in the Latin25 base 25 symbol
-/// alphabet. This is useful for primary keys and object identifiers that you
-/// need to scan for in log output, for example.
+/// alphabet.
+///
+/// This is useful for primary keys and object identifiers that you need to
+/// scan for in log output, for example.
 pub fn to_latin25(n: u64) -> String {
     let mut result = String::new();
     let mut num = n;
