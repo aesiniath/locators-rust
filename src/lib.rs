@@ -2,7 +2,8 @@ pub mod base62;
 pub mod english16;
 pub mod latin25;
 
-pub fn pad_with_zeros(width: usize, s: &str) -> String {
+#[allow(dead_code)]
+fn pad_with_zeros(width: usize, s: &str) -> String {
     if s.len() >= width {
         s.to_owned()
     } else {
