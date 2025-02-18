@@ -114,7 +114,10 @@ pub fn from_latin25(s: &str) -> Option<u64> {
 /// Latin25 string.
 ///
 /// ```
-/// hash_string_to_latin25 "You'll get used to it. Or, you'll have a psychotic episode"
+/// # use locators::latin25::hash_string_to_latin25;
+/// # let x =
+/// hash_string_to_latin25("You'll get used to it. Or, you'll have a psychotic episode");
+/// # assert_eq!(x, "E4AJ4G9E0T8Z8T");
 /// ```
 /// will result in `"E4AJ4G9E0T8Z8T"`.
 pub fn hash_string_to_latin25(s: &str) -> String {
