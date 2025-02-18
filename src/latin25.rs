@@ -1,6 +1,14 @@
+//! A symbol set with twenty-five visually distinct characters.
+//!
+//! These are not protected against similar pronounciations; if you need to
+//! read your identifiers _aloud_ use [English16](crate::english16) instead.
+
 use crate::greater_than;
 use sha2::Digest;
 
+/// Given a number, convert it to a string in the Latin25 base 25 symbol
+/// alphabet. This is useful for primary keys and object identifiers that you
+/// need to scan for in log output, for example.
 pub fn to_latin25(n: u64) -> String {
     let mut result = String::new();
     let mut num = n;
@@ -49,6 +57,8 @@ pub fn to_latin25(n: u64) -> String {
         .collect()
 }
 
+/// Given a number encoded in the Latin25 alphabet, convert it back to a base
+/// 10 decimal.
 pub fn from_latin25(s: &str) -> Option<u64> {
     let mut result = 0;
 
@@ -91,6 +101,13 @@ pub fn from_latin25(s: &str) -> Option<u64> {
     Some(result)
 }
 
+/// Take an arbitrary sequence of bytes, hash it with SHA256, then format as a
+/// Latin25 string.
+///
+/// ```
+/// hash_string_to_latin25 "You'll get used to it. Or, you'll have a psychotic episode"
+/// ```
+/// will result in `"E4AJ4G9E0T8Z8T"`.
 pub fn hash_string_to_latin25(s: &str) -> String {
     let mut hasher = sha2::Sha256::new();
     hasher.update(s.as_bytes());

@@ -1,7 +1,26 @@
+//! A symbol set with sixteen uniquely pronounceable digits.
+//!
+//! The fact there are sixteen symbols is more an indication of a certain
+//! degree of bullheaded-ness on the part of the author, and less of any kind
+//! of actual requirement. We might have a slighly better readback score if we
+//! dropped to 15 or 14 unique characters. It does mean you can match up with
+//! hexidecimal, which is not entirely without merit.
+//!
+//! The grouping of letters and numbers was the hard part; having come up with
+//! the set and deconflicted the choices, the ordering is then entirely
+//! arbitrary. Since there are some numbers, might as well have them at the
+//! same place they correspond to in base 10; the letters were then allocated
+//! in alpha order in the remaining slots.
+
 use crate::greater_than;
 
-// a function which converts a number to base 16 but then uses the English16
-// character set to represent it.
+/// Given a number, convert it to a string in the English16 base 16 symbol
+/// alphabet.
+///
+/// You can use this as a replacement for the standard \'0\'-\'9\' \'A\'-\'F\'
+/// symbols traditionally used to express hexidemimal, though really the fact
+/// that we came up with 16 total unique symbols was a nice co-incidence, not
+/// a requirement.
 pub fn to_english16(n: u32) -> String {
     let mut result = String::new();
     let mut num = n;
@@ -41,7 +60,8 @@ pub fn to_english16(n: u32) -> String {
         .collect()
 }
 
-// convert from the english 16 alphabet to base 10 decimal
+/// Given a number encoded in the English16 alphabet, convert it back to a
+/// base 10 decimal.
 pub fn from_english16(s: &str) -> Option<u32> {
     let mut result = 0;
 
