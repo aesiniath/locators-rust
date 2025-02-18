@@ -1,4 +1,10 @@
-//! A symbol set with sixteen uniquely pronounceable digits.
+//! Locators humans can exchange when speaking aloud.
+//!
+//! This is a symbol set with sixteen uniquely pronounceable digits. English16
+//! was somewhat inspired by the record locators used by the civilian air
+//! travel industry, but with the restriction that the symbol set is carefully
+//! chosen (aviation locators do heroic things like excluding 'I' but not much
+//! else).
 //!
 //! The fact there are sixteen symbols is more an indication of a certain
 //! degree of bullheaded-ness on the part of the author, and less of any kind

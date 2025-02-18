@@ -1,4 +1,6 @@
-//! A symbol set with twenty-five visually distinct characters.
+//! An alternate character set chosen for visual distinctiveness.
+//!
+//! This is a symbol set with twenty-five visually distinct glyphs.
 //!
 //! This alphabet's letters were chosen to maximize the contrast in glyph
 //! shapes and to avoid ambiguities. So, for example, only one of `'2'` and
