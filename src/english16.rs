@@ -29,13 +29,13 @@
 //! | **`'4'`** | _4th_ | \['foa\] | `'4'` and `'5'` are often confused, and '5' is definitely out due to its collision with `'I'` when spoken, and `'S'` in writing. |
 //! | **`'F'`** | _5th_ | /f/ | `'F'` and `'S'` are notoriously confused when spoken aloud, making the choice of `'F'` borderline, but `'S'` is already disqualified for looking like `'5'`. |
 //! | **`'H'`** | _6th_ | /h/ | chosen from `'H'` and `'8'`. The sixth ordinal is `'6'` knocked out by choice of `'X'` below |
-//! | **`'7'`** | _7th_ | | |
-//! | **`'8'`** | _8th_ | | |
-//! | **`'9'`** | _9th_ | | |
+//! | **`'7'`** | _7th_ | \[ˈsɛv.n\] | chosen from `'7'` and `'N'`, the former's additional sounds giving it a bit of additional aural distinction. |
+//! | **`'8'`** | _8th_ | \[ˈei̯t\] | Uncomfortably close to `'H'` above, but the pronounciation _is_ distinct. |
+//! | **`'9'`** | _9th_ | \[ˈnaɪn\] | |
 //! | **`'K'`** | _10th_ | /eɪ/ | `'A'`, `'J'`, `'K'`. |
 //! | **`'L'`** | _11th_ | \[el\] | `'L'` has good phonetics, and as long as it is upper case (which the whole English16 symbol set is) there's no conflict with `'1'`. |
-//! | **`'M'`** | _12th_ | \[em\] | chosen from `'M'` and `'N'`. While these are different phonetically, they both hold the consonant sound and can be confused, and meanwhile `'N'` is a little too close to `'7'`. |
-//! | **`'R'`** | _13th_ | | |
+//! | **`'M'`** | _12th_ | \[em\] | chosen from `'M'` and `'N'`, which while phonetically distinct, seem to get frequently confused in readbacks as they both hold the consonant sound and can be confused. |
+//! | **`'R'`** | _13th_ | \[r\] | chef-kiss, no notes |
 //! | **`'X'`** | _14th_ | /x/ | chosen from `'X'` and `'6'`. |
 //! | **`'Y'`** | _15th_ | /aɪ/ | chosen from `'I'`, `'Y'`, and `'5'`. `'I'` is out for the usual reason of being similar to `'1'`. |
 
