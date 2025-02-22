@@ -9,6 +9,36 @@
 //! available; having chosen `'0'` to represent zero the other candidates are
 //! knocked out.
 //!
+//! The symbol set is as follows:
+//!
+//! | Digit  | Ordinal | Selection Notes |
+//! |:-:|:-:|:------|
+//! | **`'0'`** | _0th_ | chosen from  `'D'`, `'O'`, `'Q'`, and `'0'`. |
+//! | **`'1'`** | _1st_ | chosen from `'I'` and `'1'`. |
+//! | **`'3'`** | _2nd_ | |
+//! | **`'4'`** | _3rd_ | |
+//! | **`'7'`** | _4th_ | |
+//! | **`'8'`** | _5th_ | chosen from `'B'` and `'8'`. |
+//! | **`'9'`** | _6th_ | |
+//! | **`'A'`** | _7th_ | |
+//! | **`'C'`** | _8th_ | |
+//! | **`'E'`** | _9th_ | chosen from `'E'` and `'F'`. |
+//! | **`'G'`** | _10th_ | chosen from `'G'` and `'6'`. |
+//! | **`'H'`** | _11th_ | |
+//! | **`'J'`** | _12th_ | |
+//! | **`'K'`** | _13th_ | |
+//! | **`'L'`** | _14th_ | |
+//! | **`'M'`** | _15th_ | |
+//! | **`'N'`** | _16th_ | |
+//! | **`'P'`** | _17th_ | chosen from `'P'` and `'R'`. |
+//! | **`'S'`** | _18th_ | chosen from `'S'` and `'5'`. |
+//! | **`'T'`** | _19th_ | |
+//! | **`'V'`** | _20th_ | chosen from `'U'` and `'V'`.  |
+//! | **`'W'`** | _21st_ | |
+//! | **`'X'`** | _22nd_ | |
+//! | **`'Y'`** | _23rd_ | |
+//! | **`'Z'`** | _24th_ | chosen from `'Z'` and `'2'`. |
+//!
 //! These are not protected against similar pronounciations; if you need to
 //! read your identifiers _aloud_ use [English16](crate::english16) instead.
 
