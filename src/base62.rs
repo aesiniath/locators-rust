@@ -1,12 +1,22 @@
+//! Machine identifiers without punctuation.
+//!
+//! This is a symbol set composed from the sixty-two distinct alphanumeric
+//! ASCII glyphs. These are useful for identifiers when they will be machine
+//! read but where punctuation symbols would be problematic, such as URLs.
+//!
+//! The symbol set is as follows: `'0'`-`'9'`, `'A'`-`'Z'`, and `'a'`-`'z'`.
+
 use base62;
 use sha2::Digest;
 
-// convert a number to base62
+/// Given a number, convert it to a string in the 62 symbol Base62 alphabet.
 pub fn to_base62(n: u64) -> String {
     // use the encoder from the base62 crate
     base62::encode(n)
 }
 
+/// Given a number encoded in the Base62 alphabet, convert it back to a base
+/// 10 decimal.
 pub fn from_base62(s: &str) -> Option<u64> {
     // use the decoder from the base62 crate
     let result = base62::decode(s);
