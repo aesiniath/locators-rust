@@ -8,9 +8,9 @@
 //!
 //! The fact there are sixteen symbols is more an indication of a certain
 //! degree of bullheaded-ness on the part of the author, and less of any kind
-//! of actual requirement. We might have a slighly better readback score if we
+//! of actual requirement. We might have a slightly better readback score if we
 //! dropped to 15 or 14 unique characters. It does mean you can match up with
-//! hexidecimal, which is not entirely without merit.
+//! hexadecimal, which is not entirely without merit.
 //!
 //! The grouping of letters and numbers was the hard part; having come up with
 //! the set and deconflicted the choices, the ordering is then entirely
@@ -24,13 +24,13 @@
 //! |:-:|:-|:-|:------|
 //! | **`'0'`** | _0th_ | \[ˈziˈro\] | `'0'` Conflicts with `'O'` obviously, and `'Q'` often enough. |
 //! | **`'1'`** | _1st_ | \['wan\] | |
-//! | **`'2'`** | _2nd_ | /u:/ | `'U'`, `'W'`, and `'2'`. `'W'` is disqualifed because of the way Australians butcher double-this and triple-that. \"Double U" or \"W\"? Who would know. |
+//! | **`'2'`** | _2nd_ | /u:/ | `'U'`, `'W'`, and `'2'`. `'W'` is disqualified because of the way Australians butcher double-this and triple-that. \"Double U" or \"W\"? Who would know. |
 //! | **`'C'`** | _3rd_ | /eː/ | `'B'`, `'C'`, `'D'`, `'E'`, `'G'`, `'P'`, `'T'`, `'V'`, and `'3'` (plus `'Z'` because Americans can't pronounce \"Zed\" properly). |
 //! | **`'4'`** | _4th_ | \['foa\] | `'4'` and `'5'` are often confused, and '5' is definitely out due to its collision with `'I'` when spoken, and `'S'` in writing. |
 //! | **`'F'`** | _5th_ | /f/ | `'F'` and `'S'` are notoriously confused when spoken aloud, making the choice of `'F'` borderline, but `'S'` is already disqualified for looking like `'5'`. |
 //! | **`'H'`** | _6th_ | /h/ | chosen from `'H'` and `'8'`. The sixth ordinal is `'6'` knocked out by choice of `'X'` below |
 //! | **`'7'`** | _7th_ | \[ˈsɛv.n\] | chosen from `'7'` and `'N'`, the former's additional sounds giving it a bit of additional aural distinction. |
-//! | **`'8'`** | _8th_ | \[ˈei̯t\] | Uncomfortably close to `'H'` above, but the pronounciation _is_ distinct. |
+//! | **`'8'`** | _8th_ | \[ˈei̯t\] | Uncomfortably close to `'H'` above, but the pronunciation _is_ distinct. |
 //! | **`'9'`** | _9th_ | \[ˈnaɪn\] | |
 //! | **`'K'`** | _10th_ | /eɪ/ | `'A'`, `'J'`, `'K'`. |
 //! | **`'L'`** | _11th_ | \[el\] | `'L'` has good phonetics, and as long as it is upper case (which the whole English16 symbol set is) there's no conflict with `'1'`. |
@@ -45,7 +45,7 @@ use crate::greater_than;
 /// alphabet.
 ///
 /// You can use this as a replacement for the standard `'0'`-`'9'` and
-/// `'A'`-`'F'` symbols traditionally used to express hexidemimal, though
+/// `'A'`-`'F'` symbols traditionally used to express hexadecimal, though
 /// really the fact that we came up with 16 total unique symbols was a nice
 /// co-incidence, not a requirement.
 pub fn to_english16(n: u32) -> String {

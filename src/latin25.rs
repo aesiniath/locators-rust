@@ -39,7 +39,7 @@
 //! | **`'Y'`** | _23rd_ | |
 //! | **`'Z'`** | _24th_ | chosen from `'Z'` and `'2'`. |
 //!
-//! These are not protected against similar pronounciations; if you need to
+//! These are not protected against similar pronunciations; if you need to
 //! read your identifiers _aloud_ use [English16](crate::english16) instead.
 
 use crate::greater_than;
