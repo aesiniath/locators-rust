@@ -24,6 +24,8 @@ jobs:
                       ~/.cargo/git/db/
                       target/
                   key: cargo-${{ runner.os }}-${{ runner.arch}}-${{ env.RUST_VERSION }}-${{ hashFiles('**/Cargo.lock') }}
+                  restore-keys: |
+                      cargo-${{ runner.os }}-${{ runner.arch}}-${{ env.RUST_VERSION }}-
 
             - name: Build sources
               run: |
