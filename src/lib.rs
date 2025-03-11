@@ -11,10 +11,10 @@
 //! fingerprints. ...C 3 E D 0 0 0 0 0 0 0 2 B D B D... "Did you say 'C' or
 //! 'D'?" and "how many zeros was that?" Brutal.
 //!
-//! So what we need is a symbol set where each digit is unambigious and
+//! So what we need is a symbol set where each digit is unambiguous and
 //! doesn't collide with the phonetics of another symbol. This package
 //! provides [English16](crate::english16), a set of 16 letters and numbers
-//! that, when spoken in _English_, have unique pronounciation and have been
+//! that, when spoken in _English_, have unique pronunciation and have been
 //! very successful in verbal communications over noisy links.
 //!
 //! Ironically, however, when used in written applications the English16 set
@@ -29,7 +29,7 @@
 //! Finally, also included is code to work in base 62, which is simply
 //! `['0'-'9', 'A'-'Z', and 'a'-'z']`. These are frequently used to express
 //! short codes in URL redirectors; you may find them a more useful encoding
-//! for expressing numbers than base 16 hexidecimal.
+//! for expressing numbers than base 16 hexadecimal.
 
 pub mod base62;
 pub mod english16;
