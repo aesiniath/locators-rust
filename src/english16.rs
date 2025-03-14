@@ -41,6 +41,8 @@
 
 use crate::greater_than;
 
+pub type English16 = String;
+
 /// Given a number, convert it to a string in the English16 base 16 symbol
 /// alphabet.
 ///

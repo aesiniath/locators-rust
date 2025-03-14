@@ -9,6 +9,8 @@
 use base62;
 use sha2::Digest;
 
+pub type Base62 = String;
+
 /// Given a number, convert it to a string in the 62 symbol Base62 alphabet.
 pub fn to_base62(n: u64) -> String {
     // use the encoder from the base62 crate

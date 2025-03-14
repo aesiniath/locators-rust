@@ -45,6 +45,8 @@
 use crate::greater_than;
 use sha2::Digest;
 
+pub type Latin25 = String;
+
 /// Given a number, convert it to a string in the Latin25 base 25 symbol
 /// alphabet.
 ///
